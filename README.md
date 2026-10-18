@@ -265,9 +265,9 @@ service isc-dhcp-server status
 
 Dari hasil di atas, service `isc-dhcp-server` berjalan tanpa error `No subnet declaration` karena Network 4 sudah dideklarasikan sebagai subnet lokal meskipun tanpa pool dinamis.
 
-#### Script Lengkap (tengen.sh)
+#### Script Lengkap 
 
-Berikut script lengkap yang dapat dijalankan langsung di `tengen`:
+Script berikut disimpan di `tengen` sebagai `soal2.sh`.
 
 ```bash
 #!/bin/bash
@@ -363,13 +363,12 @@ ip -4 -br addr
 
 Klien dari Network 2 dan Network 3 berhasil memperoleh lease dari `tengen` melalui relay di `jichi`, dibuktikan dengan alamat IP yang terdapat pada rentang subnet masing-masing.
 
-#### Script Lengkap (relay.sh)
+#### Script Lengkap
 
-Berikut script lengkap yang dapat dijalankan langsung di `jichi`:
+Script berikut disimpan di node `jichi` sebagai `soal3.sh`:
 
 ```bash
 #!/bin/bash
-# Soal 3 - DHCP Relay. Simpan di /root/relay.sh
 
 apt-get update
 apt-get install -y isc-dhcp-relay
@@ -463,11 +462,9 @@ ip -4 -br addr
 
 Itadori dan Fushiguro memperoleh alamat dari Pool 1, sedangkan Zenin dan Okkotsu dari Pool 2, membuktikan bahwa seleksi pool berbasis MAC berjalan sesuai rancangan.
 
-#### Script Lengkap (dhcp-pool.sh)
+#### Script Lengkap 
 
-> **Node: `tengen` (`192.214.4.10`)**
-> Simpan di `/root/dhcp-pool.sh`, jalankan dengan `bash /root/dhcp-pool.sh`
-> Script ini menimpa `/etc/dhcp/dhcpd.conf` dengan konfigurasi lengkap soal 2 dan 4 sekaligus.
+Script berikut disimpan di node `Tengen` sebagai `soal4.sh`:
 
 ```bash
 #!/bin/bash
@@ -608,10 +605,9 @@ Ino alamat dari pool short lease, sedangkan Miwa dari pool long lease. Lease tim
 
 ![alt text](assets/image-109.png)
 
-#### Script Lengkap (dhcp-net3.sh)
+#### Script Lengkap
 
-> **Node: `tengen` (`192.214.4.10`)**
-> Simpan di `/root/dhcp-net3.sh`, jalankan dengan `bash /root/dhcp-net3.sh`
+>Script berikut disimpan di node `Tengen` sebagai `soal4.sh`:
 
 
 ```bash
@@ -746,12 +742,10 @@ Alamat yang diterima Kugisaki adalah `192.214.3.99` sesuai reservasi, membuktika
 
 #### Script Lengkap (dhcp-fixed.sh)
 
-> **Node: `tengen` (`192.214.4.10`)**
+Script berikut disimpan di node `Tengen` sebagai `soal6.sh`:
 
 ```bash
 #!/bin/bash
-# Soal 6 - DHCP Fixed Address. Simpan di /root/dhcp-fixed.sh
-
 cat > /etc/dhcp/dhcpd.conf << EOF
 # Global
 option domain-name-servers 192.214.1.2, 192.214.1.3;
@@ -1434,9 +1428,7 @@ Keempat pengujian tersebut membuktikan bahwa DNS Master dan Slave dapat menjawab
 
 ##### Script DNS Master pada Utahime
 
-**Node: `utahime` (`192.214.1.2`)**
-
-Simpan sebagai `/root/soal11-utahime.sh`.
+Script berikut disimpan di node `Utahime` sebagai `soal11.sh`:
 
 ```bash
 #!/bin/bash
@@ -1494,9 +1486,7 @@ service named status
 
 ##### Script DNS Slave pada Shoko
 
-**Node: `shoko` (`192.214.1.3`)**
-
-Simpan sebagai `/root/soal11-shoko.sh`.
+Script berikut disimpan di node `Shoko` sebagai `soal11.sh`:
 
 ```bash
 #!/bin/bash
@@ -1674,15 +1664,12 @@ Hasil pengujian menunjukkan empat paket dikirim dan empat paket diterima dengan 
 
 Persistensi konfigurasi setelah node GNS3 dihentikan dan dijalankan kembali belum diverifikasi. Oleh karena itu, pengujian restart node masih diperlukan untuk memastikan file konfigurasi tetap tersedia dan layanan DNS dapat berjalan kembali tanpa konfigurasi ulang secara manual.
 
-#### Script Lengkap (soal12.sh)
+#### Script Lengkap
 
-**Node: `utahime` (`192.214.1.2`)**
-
-`/root/soal12.sh`
+Script berikut disimpan di node `Utahime` sebagai `soal12.sh`:
 
 ```bash
 #!/bin/bash
-# Soal 12 - DNS Record, Reverse DNS, dan DNS Forwarder. Simpan di /root/soal12.sh
 
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install -y bind9 bind9utils bind9-doc
@@ -2021,17 +2008,13 @@ Konfigurasi MariaDB Master-Slave pada node Yaga dan Inumaki berhasil dijalankan.
 
 Pengujian dengan memasukkan data `replication_test` pada Yaga dan memeriksa data yang sama pada Inumaki membuktikan bahwa replikasi data berjalan. Dengan demikian, persyaratan utama Soal 13 mengenai konfigurasi Master-Slave dan pembuktian replikasi data telah terpenuhi.
 
-#### Script Lengkap (soal13.sh)
+#### Script Lengkap
 
-##### Script DB-Master pada Yaga
+Script berikut disimpan di node `Yaga` sebagai `soal13.sh`:
 
-**Node: `yaga` (`192.214.4.41`)**
-
-`/root/soal13.sh`
 
 ```bash
 #!/bin/bash
-# Soal 13 - MariaDB DB-Master. Simpan di /root/soal13.sh
 
 apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install -y mariadb-server mariadb-client
@@ -2073,9 +2056,7 @@ EOF
 
 ##### Script DB-Slave pada Inumaki
 
-**Node: `inumaki` (`192.214.4.42`)**
-
-`/root/soal13.sh`
+Script berikut disimpan di node `Utahime` sebagai `soal13.sh`:
 
 ```bash
 #!/bin/bash
